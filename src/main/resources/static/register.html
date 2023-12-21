@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="main-container">
+            <div class="container">
+                <h1>Registration</h1>
+                <form id="registrationForm">
+                <label for="name">Name:</label><br>
+                <input type="name" id="name" name="name" required><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required><br>
+                <input type="submit" value="Register">
+                </form>
+                <a href="log.html">Already have an account? Log in</a>
+            </div>
+    </div>
+<!-- JavaScript -->
+    <script>
+         document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Capture form data
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value
+        };
+
+        // Send data to backend
+        fetch('http://localhost:8080/registration', { // backend URL to send data
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.text()) // THE RESPONSE IS TEXT NOT JSON(WE ARE USING CUSTOM RESPONSE MESSAGE)
+        .then(data => {
+            console.log('Success:', data);
+            // Handle success - redirect or show message
+            window.location.href = 'verification.html'; // Redirect to login page
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Handle errors - show error message
+        });
+    });
+    </script>
+</body>
+</html>

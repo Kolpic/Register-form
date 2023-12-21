@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Add any CSS links here -->
+</head>
+<body>
+<h1>Welcome to our website!</h1>
+<p>Welcome, <span id="userEmail">[Email]</span>!</p>
+<!--<button id="logoutButton">Logout</button>-->
+<button onclick="logout()">Logout</button>
+<!-- JavaScript -->
+<script>
+    window.onload = function() {
+        // Retrieve user's name from local storage
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) {
+            document.getElementById('userEmail').textContent = userEmail;
+        }
+    };
+
+    function logout() {
+    localStorage.clear(); // Clears all local storage data
+    window.location.href = 'log.html'; // Redirect to login page
+    }
+</script>
+</body>
+</html>

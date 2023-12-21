@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Account</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="container">
+        <h1>Account Verification</h1>
+        <form id="verificationForm">
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            <label for="verificationCode">Verification Code:</label><br>
+            <input type="text" id="verificationCode" name="verificationCode" required><br>
+            <input type="submit" value="Verify Account">
+        </form>
+        </div>
+    </div>
+<!-- JavaScript -->
+<script>
+    document.getElementById('verificationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = {
+            email: document.getElementById('email').value,
+            verificationCode: document.getElementById('verificationCode').value
+        };
+
+        fetch('http://localhost:8080/verify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error('Verification failed');
+            }
+        })
+        .then(data => {
+            console.log('Verification Success:', data);
+            window.location.href = 'log.html'; // Redirect to login page after successful verification
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle errors - show message or log
+        });
+    });
+</script>
+</body>
+</html>
