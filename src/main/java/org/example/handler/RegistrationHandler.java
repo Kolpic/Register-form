@@ -3,6 +3,7 @@ package org.example.handler;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import org.example.exception.InvalidUserInputData;
 import org.example.model.User;
 import org.example.service.UserService;
 
@@ -12,23 +13,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.SQLException;
 
-/**
- * Handles HTTP requests for user registration.
- * This handler processes POST requests containing user registration data.
- * First registers the user, if everything is valid,then sends a verification email.
- */
 public class RegistrationHandler implements HttpHandler {
 
     private final UserService userService = UserService.getInstance();
 
-    /**
-     * Handles an HTTP exchange. Specifically handles POST requests for user registration.
-     * Reads the request body, parses the user data from JSON, registers the user,
-     * creates and sends a verification code, and sends a response back to the client.
-     *
-     * @param exchange The HTTP exchange containing the request from the client and used to send the response.
-     * @throws IOException if there is an issue reading the request or sending the response.
-     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 

@@ -14,23 +14,10 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 
-/**
- * Handles HTTP requests for user login.
- * This handler processes POST requests containing login data (email and password),
- * authenticates the user, and responds with the login status.
- */
 public class LoginHandler implements HttpHandler {
 
     private final UserService userService = UserService.getInstance();
 
-    /**
-     * Handles an HTTP exchange for a login request. Specifically handles POST requests
-     * for user login by reading the request body, parsing the user data from JSON,
-     * authenticating the user using UserService, and sending a response back to the client.
-     *
-     * @param exchange The HTTP exchange containing the request from the client and used to send the response.
-     * @throws IOException if there is an issue reading the request or sending the response.
-     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 
@@ -65,6 +52,8 @@ public class LoginHandler implements HttpHandler {
                 response = "Server error";
                 responseCode = 500; // Internal Server Error
                 e.printStackTrace(); // Log the exception
+            } finally {
+                int a = 5;
             }
             exchange.getResponseHeaders().set("Content-Type", "application/json");
             String jsonResponse = new Gson().toJson(new LoginResponseDTO(response, user.getEmail()));

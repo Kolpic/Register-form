@@ -12,20 +12,10 @@ import java.util.UUID;
 
 import static org.example.utils.SessionManager.storeSessionToken;
 
-/**
- * Repository class for managing user-related data persistence.
- * Provides methods for saving users to the database, storing verification codes,
- * verifying users, logging in users, and retrieving hashed passwords.
- */
 public class UserRepository {
 
     private static UserRepository userRepository;
 
-    /**
-     * Singleton pattern to ensure only one instance of UserRepository exists.
-     *
-     * @return The single instance of UserRepository.
-     */
     public static UserRepository getInstance() {
         if (userRepository == null) {
             userRepository = new UserRepository();
@@ -33,14 +23,6 @@ public class UserRepository {
         return userRepository;
     }
 
-    /**
-     * Saves a user's data to the database.
-     *
-     * @param username The user's name.
-     * @param email The user's email.
-     * @param password The user's hashed password.
-     * @throws SQLException If a database access error occurs.
-     */
     public void saveUserToDatabase(String username, String email, String password) throws SQLException {
         // Store user in the database
         try (Connection connection = DatabaseConnection.getConnection()){
@@ -56,13 +38,6 @@ public class UserRepository {
         }
     }
 
-    /**
-     * Stores a verification code for a user in the database.
-     *
-     * @param verificationCode The verification code to store.
-     * @param email The email of the user to whom the code belongs.
-     * @throws SQLException If a database access error occurs.
-     */
     public void storeVerificationCodeInDatabase(String verificationCode, String email) throws SQLException {
         // Store the verification code in the database
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -75,14 +50,6 @@ public class UserRepository {
         }
     }
 
-    /**
-     * Verifies a user's email using the provided verification code.
-     *
-     * @param email The user's email to verify.
-     * @param verificationCode The verification code for validation.
-     * @return true if the verification is successful, false otherwise.
-     * @throws SQLException If a database access error occurs.
-     */
     public boolean verify(String email, String verificationCode) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             String sqlStatement = "SELECT verification_code FROM users WHERE email = ?";
@@ -101,14 +68,6 @@ public class UserRepository {
         return false;
     }
 
-    /**
-     * Authenticates a user's login based on email and password.
-     *
-     * @param email The user's email.
-     * @param password The user's password.
-     * @return A session token if login is successful, null otherwise.
-     * @throws SQLException If a database access error occurs.
-     */
     public String login(String email, String password) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             String sqlStatement = "SELECT password, verification_status FROM users WHERE email = ?";
@@ -133,13 +92,6 @@ public class UserRepository {
         return null;
     }
 
-    /**
-     * Retrieves the hashed password of a user based on their email.
-     *
-     * @param email The email of the user whose password is to be retrieved.
-     * @return The hashed password of the user.
-     * @throws SQLException If a database access error occurs.
-     */
     public String getHashedPasswordForUser(String email) throws SQLException {
         String hashedPassword = null;
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -156,12 +108,6 @@ public class UserRepository {
         return hashedPassword;
     }
 
-    /**
-     * Updates the verification status of a user to true.
-     *
-     * @param email The email of the user whose status is to be updated.
-     * @throws SQLException If a database access error occurs.
-     */
     private void updateVerificationStatus(String email) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             String sqlStatement = "UPDATE users SET verification_status = TRUE, " +

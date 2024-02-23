@@ -13,23 +13,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.SQLException;
 
-/**
- * Handles HTTP requests for user verification.
- * This handler processes POST requests containing verification data (email and verification code),
- * verifies the user, and responds with the verification status.
- */
 public class VerificationHandler implements HttpHandler {
 
     private final UserService userService = UserService.getInstance();
 
-    /**
-     * Handles an HTTP exchange for a user verification request. Specifically handles POST requests
-     * by reading the request body, parsing the verification data from JSON, authenticating the user's verification code
-     * using UserService, and sending a response back to the client.
-     *
-     * @param exchange The HTTP exchange containing the request from the client and used to send the response.
-     * @throws IOException if there is an issue reading the request or sending the response.
-     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if (exchange.getRequestMethod().equalsIgnoreCase("POST")) {

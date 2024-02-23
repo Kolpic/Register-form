@@ -40,11 +40,13 @@
             if (response.ok) {
                 return response.text();
             } else {
+                alert("The verification code is wrong");
                 throw new Error('Verification failed');
             }
         })
         .then(data => {
             console.log('Verification Success:', data);
+            alert("Successful verification");
             window.location.href = 'log.html'; // Redirect to login page after successful verification
         })
         .catch(error => {

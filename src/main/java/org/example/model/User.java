@@ -1,5 +1,6 @@
 package org.example.model;
-
+// 1 handler , mahane na validaciq, pytest/assert, ako grumne json error hand., HttpServer, blokirano i neblokirano, sinhr i asinhr
+// da opravq handlerite da ne sa samo za post, da mahna dto-tata
 public class User {
 
     private String name;

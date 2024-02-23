@@ -11,19 +11,26 @@
 <!--<button id="logoutButton">Logout</button>-->
 <button onclick="logout()">Logout</button>
 <!-- JavaScript -->
+</body>
 <script>
+    let userEmail = null;
+
     window.onload = function() {
         // Retrieve user's name from local storage
-        const userEmail = localStorage.getItem('userEmail');
+        userEmail = localStorage.getItem('userEmail');
+        if (userEmail == null) {
+            window.location.href = 'log.html';
+            //alert("Cannot open this page");
+            //throw new Error('Error getting resource');
+        }
         if (userEmail) {
             document.getElementById('userEmail').textContent = userEmail;
         }
     };
 
     function logout() {
-    localStorage.clear(); // Clears all local storage data
-    window.location.href = 'log.html'; // Redirect to login page
+     localStorage.clear(); // Clears all local storage data
+     window.location.href = 'log.html'; // Redirect to login page
     }
 </script>
-</body>
 </html>

@@ -45,11 +45,16 @@
         .then(data => {
             console.log('Success:', data);
             // Handle success - redirect or show message
-            window.location.href = 'verification.html'; // Redirect to login page
+            alert("Congratulations, you are now registered");
+            window.location.href = 'verification.html'; // Redirect to verification page
         })
         .catch((error) => {
+            if (error.response) {
+                alert(`Error: ${error.response.data.message}`)
+            }
+            alert("The email or name is invalid, try another");
             console.error('Error:', error);
-            // Handle errors - show error message
+            // Handle errors - show error message1
         });
     });
     </script>
