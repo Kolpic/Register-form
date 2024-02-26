@@ -37,9 +37,9 @@ public class UserService {
 
     public void registerUser(User user) throws SQLException {
         // Validate email and password
-        if (user.getName().length() < 3 || user.getName().length() > 100) {
-            throw new InvalidUserInputData("Invalid name");
-        }
+//        if (user.getName().length() < 3 || user.getName().length() > 100) {
+//            throw new InvalidUserInputData("Invalid name");
+//        }
         if (!emailValidator(user.getEmail())) {
             throw new InvalidUserInputData("Invalid email");
         }
@@ -50,7 +50,7 @@ public class UserService {
         // Hash password
         String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 
-        userRepository.saveUserToDatabase(user.getName(), user.getEmail(), hashedPassword);
+        userRepository.saveUserToDatabase(user.getFull_name(), user.getEmail(), hashedPassword);
     }
 
     public String createAndSendVerificationCode(String email) throws SQLException {

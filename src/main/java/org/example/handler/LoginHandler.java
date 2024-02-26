@@ -31,6 +31,12 @@ public class LoginHandler implements HttpHandler {
             }
             String json = sb.toString();
 
+            if (exchange.getRequestURI().toString().equals("/login-endpoint")) {
+                int a = 3;
+            } else if (exchange.getRequestURI().toString().equals("/registration")) {
+                int a = 5;
+            }
+
             // Parse JSON to User object
             Gson gson = new Gson();
             User user = gson.fromJson(json, User.class);

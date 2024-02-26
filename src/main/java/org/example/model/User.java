@@ -1,24 +1,25 @@
 package org.example.model;
-// 1 handler , mahane na validaciq, pytest/assert, ako grumne json error hand., HttpServer, blokirano i neblokirano, sinhr i asinhr
+// mahane na javaDoc, mahane na validaciq ot service - dobavqne v bazata
+// 1 handler , mahane na validaciq, pytest/assert, ako grumne json - error hand., HttpServer,
+// blokirano i neblokirano, sinhr i asinhr
 // da opravq handlerite da ne sa samo za post, da mahna dto-tata
 public class User {
 
-    private String name;
+    private String full_name;
     private String email;
     private String password;
 
-    public User(String name, String email, String password) {
-        this.name = name;
+    public User(String full_name, String email, String password) {
+        this.full_name = full_name;
         this.email = email;
         this.password = password;
     }
-
-    public String getName() {
-        return name;
+    public String getFull_name() {
+        return full_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFull_name(String name) {
+        this.full_name = name;
     }
 
     public String getEmail() {

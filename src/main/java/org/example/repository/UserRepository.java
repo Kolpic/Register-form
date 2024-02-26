@@ -26,7 +26,7 @@ public class UserRepository {
     public void saveUserToDatabase(String username, String email, String password) throws SQLException {
         // Store user in the database
         try (Connection connection = DatabaseConnection.getConnection()){
-            String sqlStatement = "INSERT INTO users (name, email, password, verification_status) " +
+            String sqlStatement = "INSERT INTO users (full_name, email, password, verification_status) " +
                     "VALUES (?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sqlStatement)) {
                 statement.setString(1, username);

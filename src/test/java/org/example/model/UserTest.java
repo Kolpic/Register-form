@@ -1,6 +1,5 @@
 package org.example.model;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +26,7 @@ class UserTest {
         User user = new User(name, email, password);
 
         // THEN
-        assertEquals(name, user.getName());
+        assertEquals(name, user.getFull_name());
         assertEquals(email, user.getEmail());
         assertEquals(password, user.getPassword());
     }
@@ -38,12 +37,12 @@ class UserTest {
         User user = new User(name, email, password);
 
         // WHEN
-        user.setName("Ivan Petrov");
+        user.setFull_name("Ivan Petrov");
         user.setEmail("ivan@example.com");
         user.setPassword("123456789");
 
         // THEN
-        assertEquals("Ivan Petrov", user.getName());
+        assertEquals("Ivan Petrov", user.getFull_name());
         assertEquals("ivan@example.com", user.getEmail());
         assertEquals("123456789", user.getPassword());
     }
